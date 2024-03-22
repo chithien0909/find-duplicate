@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 	"strings"
 )
@@ -69,8 +68,6 @@ func FindTopDuplicates2(str string) (result []string) {
 		}
 
 	}
-
-	fmt.Println(acc)
 
 	return []string{top1, top2}
 }
