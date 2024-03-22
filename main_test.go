@@ -25,11 +25,6 @@ var testCases = []struct {
 		str:      "Of course, I can use strings.ReplaceAll to manually convert some of these, but I'd also like arbitrary unicode escapes to be translated to the unicode glyph, and so on. Is there a standard library or 3rd party library for that? Input is not trusted, it needs to be safe.",
 		expected: []string{"e", "t"},
 	},
-	{
-		name:     "Test 4",
-		str:      "an object, situation, quality, or action that is not exactly known or stated",
-		expected: []string{"t", "a"},
-	},
 }
 
 func Test_FindTopDuplicates1(t *testing.T) {

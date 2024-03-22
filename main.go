@@ -6,22 +6,32 @@ import (
 	"strings"
 )
 
-func FindTopDuplicates1(str string) (list []string) {
+func GetCharCount(str string) (map[string]int, []string) {
 	arr := strings.Split(strings.ToLower(str), "")
-	acc := make(map[string]int)
-	list = make([]string, 2)
+	// Count number of chars
+	result := make(map[string]int)
+	// List of chars
+	list := make([]string, 0)
 	for _, c := range arr {
 		if c == "'" || c == "," || c == "." || c == " " || c == "-" || c == "_" ||
 			c == "!" || c == "?" || c == ":" || c == ";" || c == "(" || c == ")" {
 			continue
 		}
-		if _, ok := acc[c]; ok {
-			acc[c]++
+		if _, ok := result[c]; ok {
+			result[c]++
 			continue
 		}
 		list = append(list, c)
-		acc[c] = 1
+		result[c] = 1
 	}
+
+	return result, list
+}
+
+func FindTopDuplicates1(str string) []string {
+
+	acc, list := GetCharCount(str)
+
 	sort.Slice(list, func(i, j int) bool {
 		return acc[list[i]] > acc[list[j]]
 	})
@@ -29,21 +39,7 @@ func FindTopDuplicates1(str string) (list []string) {
 }
 
 func FindTopDuplicates2(str string) (result []string) {
-	arr := strings.Split(strings.ToLower(str), "")
-	acc := make(map[string]int)
-	list := make([]string, 0)
-	for _, c := range arr {
-		if c == "'" || c == "," || c == "." || c == " " || c == "-" || c == "_" ||
-			c == "!" || c == "?" || c == ":" || c == ";" || c == "(" || c == ")" {
-			continue
-		}
-		if _, ok := acc[c]; ok {
-			acc[c]++
-			continue
-		}
-		list = append(list, c)
-		acc[c] = 1
-	}
+	acc, _ := GetCharCount(str)
 	top1 := ""
 	top2 := ""
 	for k, v := range acc {
